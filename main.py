@@ -1,4 +1,4 @@
-#import Show
+from functools import reduce
 board = [
     [7, 8, 0, 4, 0, 0, 1, 2, 0],
     [6, 0, 0, 0, 7, 5, 0, 0, 9],
@@ -11,30 +11,22 @@ board = [
     [0, 4, 9, 2, 0, 6, 0, 0, 7]
 ]
 
-# TODO transformar a função em orientação objeto no outro documento e
-def mostrar(matriz):
-    for lines in range(len(matriz)):
-        print('')
-        for columns in range(len(matriz[lines])):
-            try:
-                print(matriz[lines][columns], end=' ')
-            except matriz[lines][columns] is None:
-                continue
 
-
+# TODO Refatorar para poder apresentar de maneira melhor
 def show(*args):
     linha = 1
     for elements in range(len(args)):
-        print(f'Mostrando os elementos da {linha}ª linha: ')
+        print('-'*80)
         for sub_elements in range(len(args[elements])):
             print(f'{args[elements][sub_elements]}')
         linha += 1
 
-# TODO Refatorar o código para evitar repettição de estruturas e laços desnecessários.
+
+# TODO Refatorar o código para evitar repetição de estruturas e laços desnecessários.
 def validar(matriz):
     x_options = []
     y_options = []
-    # Verificand as possibilidades horizontais
+    # Verificando as possibilidades horizontais
     for y in range(len(matriz)):
         x_possibility = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         for x in range(len(matriz)):
@@ -49,10 +41,19 @@ def validar(matriz):
                 y_possibility.remove(matriz[x][y])
         y_options.append(y_possibility)
 
-    return show(x_options, y_options)
+    show(board, x_options, y_options)
+    return solve(board, x_options, y_options)
 
 
-print(mostrar(board))
+def solve(matriz, horizontal_list, vertical_list):
+    print('=' * 30)
+    for x in range(len(matriz)):
+        for y in range(len(matriz[x])):
+            if matriz[y][x] == 0:
+                duplicate_numbers = [*horizontal_list[x], *vertical_list[y]]
+                print(duplicate_numbers)
+            else:
+                continue
+
 print('-' * 80)
 validar(board)
-
