@@ -1,4 +1,3 @@
-from functools import reduce
 board = [
     [7, 8, 0, 4, 0, 0, 1, 2, 0],
     [6, 0, 0, 0, 7, 5, 0, 0, 9],
@@ -11,49 +10,56 @@ board = [
     [0, 4, 9, 2, 0, 6, 0, 0, 7]
 ]
 
-
-# TODO Refatorar para poder apresentar de maneira melhor
-def show(*args):
-    linha = 1
-    for elements in range(len(args)):
-        print('-'*80)
-        for sub_elements in range(len(args[elements])):
-            print(f'{args[elements][sub_elements]}')
-        linha += 1
+#def visualization():
+#    pass
 
 
-# TODO Refatorar o código para evitar repetição de estruturas e laços desnecessários.
-def validar(matriz):
-    x_options = []
-    y_options = []
-    # Verificando as possibilidades horizontais
-    for y in range(len(matriz)):
-        x_possibility = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        for x in range(len(matriz)):
-            if matriz[y][x] in x_possibility:
-                x_possibility.remove(matriz[y][x])
-        x_options.append(x_possibility)
+def show(matrix):
+    print('\n')
+    print(f'{" Mostrando sudoku ":=^28}')
 
-    for y in range(len(matriz)):
-        y_possibility = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        for x in range(len(matriz)):
-            if matriz[x][y] in y_possibility:
-                y_possibility.remove(matriz[x][y])
-        y_options.append(y_possibility)
-
-    show(board, x_options, y_options)
-    return solve(board, x_options, y_options)
-
-
-def solve(matriz, horizontal_list, vertical_list):
-    print('=' * 30)
-    for x in range(len(matriz)):
-        for y in range(len(matriz[x])):
-            if matriz[y][x] == 0:
-                duplicate_numbers = [*horizontal_list[x], *vertical_list[y]]
-                print(duplicate_numbers)
+    # Exibindo o jogo ao usuário    
+    for lines in range(len(matrix)):
+        if lines % 3 == 0 and lines != 0:
+            print('-' * 28)
+        for columns in range(len(matrix)):
+            if columns % 3 == 0 and columns != 0:
+                print('|', end='') 
+            if columns == 8:
+                print(f' {matrix[lines][columns]}')
+            else:     
+                print(f' {matrix[lines][columns]}', end = ' ')
+    print('-' * 28)
+    
+            
+def empty(matrix):
+    print('\nPosição da matriz com valores vazios:') 
+    for lines in range(len(matrix)):
+        print(f'\n{lines}ª linha: ')
+        for columns in range(len(matrix[0])):
+            if matrix[lines][columns] == 0:
+                print(f'{lines},{columns}')
             else:
-                continue
+                continue 
 
-print('-' * 80)
-validar(board)
+def filling(matrix):
+    for lines in range(len(matrix)):
+        for columns in range(len(matrix[0])):
+            if matrix[lines][columns] == 0:
+                print(f'\nTestando elemento [{lines},{columns}] com o valor: ',end='')
+                for numbers in range(1,10):
+                    if numbers in matrix[lines]:
+                        for range()
+                        continue
+                    else:
+                        matrix[lines][columns] = numbers
+                        print(f'{numbers}',end='')
+    show(board)
+            
+           
+def validating(board):
+    pass            
+# Exibição ao usuário
+show(board)
+empty(board)
+filling(board)
