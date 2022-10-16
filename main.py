@@ -22,13 +22,16 @@ def show(matrix):
     for lines in range(len(matrix)):
         if lines % 3 == 0 and lines != 0:
             print('-' * 28)
+        
         for columns in range(len(matrix)):
             if columns % 3 == 0 and columns != 0:
                 print('|', end='') 
+            
             if columns == 8:
                 print(f' {matrix[lines][columns]}')
             else:     
                 print(f' {matrix[lines][columns]}', end = ' ')
+    
     print('-' * 28)
     
             
@@ -38,27 +41,30 @@ def empty(matrix):
         print(f'\n{lines}ª linha: ')
         for columns in range(len(matrix[0])):
             if matrix[lines][columns] == 0:
-                print(f'{lines},{columns}')
+                print(f'Analisando opções do elemento: [{lines},{columns}]')
+                validation(board, lines, columns)
             else:
                 continue 
-
-def filling(matrix):
-    for lines in range(len(matrix)):
-        for columns in range(len(matrix[0])):
-            if matrix[lines][columns] == 0:
-                print(f'\nTestando elemento [{lines},{columns}] com o valor: ',end='')
-                for numbers in range(1,10):
-                    if numbers in matrix[lines]:
-                        for range()
-                        continue
-                    else:
-                        matrix[lines][columns] = numbers
-                        print(f'{numbers}',end='')
-    show(board)
             
            
-def validating(board):
-    pass            
+def validation(board,lines,col):
+    possis = []
+    for pos in range(9):
+        # Linhas
+        possis.append(board[lines][pos])
+        print(f'Adicionando o elemento [{lines},{pos}] nas impossibilidades: {board[lines][pos]}')
+    print('-' * 58)
+        # Colunas
+    for pos in range(9):
+        possis.append(board[pos][col])
+        print(f'Adicionando o elemento [{pos},{col}] nas impossibilidades: {board[pos][col]}')
+    
+    print(set(sorted(possis)))
+    print('\n')
+    # 'Caixa'
+            
+            
+        
 # Exibição ao usuário
 show(board)
 empty(board)
