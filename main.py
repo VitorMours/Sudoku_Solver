@@ -59,13 +59,22 @@ def validation(board,lines,col):
         possis.append(board[pos][col])
         print(f'Adicionando o elemento [{pos},{col}] nas impossibilidades: {board[pos][col]}')
     
-    print(set(sorted(possis)))
     print('\n')
     # 'Caixa'
+    print('Checando agora a "caixa" de números:')
+    pos_x = (col // 3) * 3 
+    pos_y = (lines // 3) * 3
             
-            
+    for box_lines in range(pos_y, pos_y + 3):
+        for box_elements in range(pos_x, pos_x + 3):
+            print(f'Elementos da caixa: {board[box_lines][box_elements]}')
+            possis.append(board[box_lines][box_elements])
+    
+    possis_set = set(sorted(possis))
+    possis_set.remove(0)
+    print(possis_set)
+    print('\n')
         
 # Exibição ao usuário
 show(board)
 empty(board)
-filling(board)
