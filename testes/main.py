@@ -1,3 +1,5 @@
+board_possis = []
+
 board = [
     [7, 8, 0, 4, 0, 0, 1, 2, 0],
     [6, 0, 0, 0, 7, 5, 0, 0, 9],
@@ -48,6 +50,8 @@ def empty(matrix):
             
            
 def validation(board,lines,col):
+    global board_possis
+    list_of_items = [1,2,3,4,5,6,7,8,9]
     possis = []
     for pos in range(9):
         # Linhas
@@ -73,8 +77,38 @@ def validation(board,lines,col):
     possis_set = set(sorted(possis))
     possis_set.remove(0)
     print(possis_set)
+    for elements in possis_set:
+        list_of_items.remove(elements)
+    print(list_of_items)
+    board_possis.append([lines,col,list_of_items])
     print('\n')
+    
+
+# ToDo consertar
+def solve(board, board_possis):
+    for elements in board_possis:
+        lines = elements[0] 
+        col = elements[1]
+        possis = elements[2]
+        for chances in possis:
+            board[lines][col] = chances
+            possis.remove(chances)
+            break
+        
+        
+        
+        
+        
+        
+        
+        
         
 # Exibição ao usuário
 show(board)
 empty(board)
+solve(board,board_possis)
+print('---------------')
+print(board_possis)
+
+
+show(board)
