@@ -15,19 +15,36 @@ class Solver:
                 if columns % self.size == 0:
                     print('| ', end='')
                 
-                if self.board[lines][columns] == 0:
-                    if columns == (self.size ** 2) - 1:
-                        print(f' |', end='')
-                    else:
-                        print(f'  ', end='')
-                    
-                else:    
-                    if columns == (self.size ** 2) - 1:
-                        print(f'{self.board[lines][columns]} |', end='')
-                    else:
-                        print(f'{self.board[lines][columns]}', end=' ')
+                if columns == (self.size ** 2) - 1:
+                    print(f'{self.board[lines][columns]} |', end='')
+                else:
+                    print(f'{self.board[lines][columns]}', end=' ')
         print('\n' + '-' * 25)
     
+    def empty(self):
+        for lines in range(len(self.board)):
+            for columns in range(len(self.board[lines])):
+                if self.board[lines][columns] == 0:
+                    return lines, columns
+        return None
+    
+    
+    def solve(self):
+        find = self.empty()
+        if not find:
+            return True
+        else:    
+            lines, columns = find
+            for option in range(1, 10):
+                if self.validate(option, lines, columns):
+                    self.board[lines][columns] = option
+                    sleep(0.1)
+                    self.show()
+                    if self.solve():
+                        return True
+
+                self.board[lines][columns] = 0                    
+        return False
     
     
     
@@ -52,19 +69,6 @@ class Solver:
         # That number is possible
         return True
 
-    
-    
-    # Solution - 
-    def solve(self):
-        for lines in range(len(self.board)):
-            for columns in range(len(self.board[lines])):
-                if self.board[lines][columns] == 0:
-                    for option in range(1,10):
-                        results = self.validate(option, lines, columns)
-                        if results:
-                            self.board[lines][columns] = option
-                            self.show()
-                            #sleep(0.5)
-        print('-=' * 30)
+
         
         
