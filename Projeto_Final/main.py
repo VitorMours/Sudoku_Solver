@@ -13,3 +13,5 @@ board = [
 ]
 sudoku = Solver(board,3)
 sudoku.show()
+sudoku.solve()
+ 
