@@ -1,5 +1,5 @@
 from solver import Solver
-
+from time import sleep
 board = [
     [7, 8, 0, 4, 0, 0, 1, 2, 0],
     [6, 0, 0, 0, 7, 5, 0, 0, 9],
@@ -11,7 +11,20 @@ board = [
     [1, 2, 0, 0, 0, 7, 4, 0, 0],
     [0, 4, 9, 2, 0, 6, 0, 0, 7]
 ]
-sudoku = Solver(board,3)
-sudoku.show()
-sudoku.solve()
+sudoku_9 = Solver(board,9)
+sudoku_9.show()
+sudoku_9.solve()
+sudoku_9.show()
  
+sleep(2)
+
+print('\nAgora resolvendo sudoku 4x4')
+board_4 = [ [0, 4, 0, 1],
+            [3, 0, 0, 0],
+            [0, 0, 0, 4],
+            [0, 0, 0, 0]]
+
+sudoku_4 = Solver(board_4,4)
+sudoku_4.show()
+sudoku_4.solve()
+sudoku_4.show()

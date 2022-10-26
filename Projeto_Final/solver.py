@@ -1,6 +1,7 @@
 from time import sleep
+import math
 class Solver:
-    def __init__(self, board, size):
+    def __init__(self, board, size = 9):
         self.validation = False
         self.board = board
         self.size = size
@@ -8,11 +9,11 @@ class Solver:
     # Visualization - OK   
     def show(self):
         for lines in range(len(self.board)):
-            if lines % self.size == 0 or lines == 0:
-                print('\n' + '-' * 25, end='')
+            if lines % int(self.size ** 0.5) == 0 or lines == 0:
+                print('\n' + '-' * 11 + int(self.size ** 0.5) , end='')
             print('')
             for columns in range(len(self.board[lines])):
-                if columns % self.size == 0:
+                if columns % int(self.size ** 0.5) == 0:
                     print('| ', end='')
                 
                 if columns == (self.size ** 2) - 1:
@@ -35,11 +36,11 @@ class Solver:
             return True
         else:    
             lines, columns = find
-            for option in range(1, 10):
+            for option in range(1, self.size + 1):
                 if self.validate(option, lines, columns):
                     self.board[lines][columns] = option
-                    sleep(0.1)
-                    self.show()
+                    #sleep(0.1)
+                    #self.show()
                     if self.solve():
                         return True
 
@@ -55,15 +56,17 @@ class Solver:
             return False                   
         
         # Columns
-        for pos in range(9):
+        for pos in range(self.size):
             if option == self.board[pos][columns]:
                 return False
         
         # Box
-        x_box = (columns // 3) * 3
-        y_box = (lines // 3) * 3
-        for x_elements in range(x_box, x_box + 3):
-            for y_elements in range(y_box, y_box + 3):
+        square = int(self.size ** 0.5)
+        x_box = (columns // square) * square
+        y_box = (lines // square) * square
+
+        for x_elements in range(x_box, x_box + square):
+            for y_elements in range(y_box, y_box + square):
                 if option == self.board[y_elements][x_elements]:
                     return False
         # That number is possible
