@@ -12,6 +12,4 @@ board = [
     [0, 4, 9, 2, 0, 6, 0, 0, 7]
 ]
 sudoku = Solver(board,3)
-sudoku.show()
-sudoku.solve()
- 
+sudoku.show() 

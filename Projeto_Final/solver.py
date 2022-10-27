@@ -1,5 +1,7 @@
 from time import sleep
 class Solver:
+ 
+    #TODO fazer todas as partes do código ficarem em função do tamanho do jogo e do tipo
     def __init__(self, board, size):
         self.validation = False
         self.board = board
@@ -38,7 +40,7 @@ class Solver:
             for option in range(1, 10):
                 if self.validate(option, lines, columns):
                     self.board[lines][columns] = option
-                    sleep(0.1)
+                    sleep(0.5)
                     self.show()
                     if self.solve():
                         return True
