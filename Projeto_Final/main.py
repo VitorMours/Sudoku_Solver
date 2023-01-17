@@ -1,4 +1,4 @@
-from solver import Solver
+from sudoku import Solver
 from time import sleep
 board = [
     [7, 8, 0, 4, 0, 0, 1, 2, 0],

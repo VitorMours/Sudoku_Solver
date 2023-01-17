@@ -1,36 +1,57 @@
 from time import sleep
-import math
 class Solver:
-    def __init__(self, board, size = 9):
+    """
+    class Solver(object)
+    | Create an object with the provided matrix, and allows
+    | the usage of the methods inside the class.
+
+    Parameters
+    ----------
+    | board: list of lists
+        The sudoku board in format of matrix (list of lists).
+    | block_width: int 
+        width of the each division of the board
+    | block_height: int
+        height of the each division of the board
+    |
+    |
+    |
+
+    Returns
+    -------
+    |
+    |
+    
+    
+    """
+    def __init__(self, board, block_width, block_height):
         self.validation = False
         self.board = board
-        self.size = size
-        
-    # Visualization - OK   
-    def show(self):
-        for lines in range(len(self.board)):
-            if lines % int(self.size ** 0.5) == 0 or lines == 0:
-                print('\n' + '-' * (11 + int(self.size ** 0.5)) , end='')
-            print('')
-            for columns in range(len(self.board[lines])):
-                if columns % int(self.size ** 0.5) == 0:
-                    print('| ', end='')
-                
-                if columns == (self.size ** 2) - 1:
-                    print(f'{self.board[lines][columns]} |', end='')
-                else:
-                    print(f'{self.board[lines][columns]}', end=' ')
-        print('\n','-' * (11 + int(self.size ** 0.5)))
-    
+        self.block_width = block_width
+        self.block_height = block_height
+
+
+    def visualization(self):
+        for index, lines in enumerate(self.board):
+            if (1 + index) % self.block_height == 0:
+                print("-" * 60)
+            for index, columns in enumerate(self.board[lines]):
+                if (index + 1) % self.block_width == 0:
+                    print(" | ")
+
+
+
     def empty(self):
+        """"""
         for lines in range(len(self.board)):
             for columns in range(len(self.board[lines])):
                 if self.board[lines][columns] == 0:
                     return lines, columns
         return None
-    
-    
+
+
     def solve(self):
+        """"""
         find = self.empty()
         if not find:
             return True
@@ -46,20 +67,21 @@ class Solver:
 
                 self.board[lines][columns] = 0                    
         return False
-    
-    
-    
+
+
+
         # Resolution - Doing
     def validate(self, option, lines, columns):
+        """"""
         # Lines
         if option in self.board[lines]:
             return False                   
-        
+
         # Columns
         for pos in range(self.size):
             if option == self.board[pos][columns]:
                 return False
-        
+
         # Box
         square = int(self.size ** 0.5)
         x_box = (columns // square) * square
@@ -73,5 +95,5 @@ class Solver:
         return True
 
 
-        
-        
+class Generator:
+    """"""
